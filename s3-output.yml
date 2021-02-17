@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates an S3 bucket configured for hosting a static website, and a Route
+  53 DNS record pointing to the bucket
+Outputs:
+  BucketName:
+    Description: Name of S3 bucket to hold website content
+    Value:
+      Fn::GetAtt:
+      - WebsiteBucket
+      - WebsiteURL
+  WebsiteURL:
+    Description: Name of S3 bucket to hold website content
+    Value:
+      Ref: WebsiteBucket
+Parameters:
+  BucketName:
+    AllowedPattern: (?!-)[a-zA-Z0-9-.]{1,63}(?<!-)
+    ConstraintDescription: must be a valid DNS zone name.
+    Description: The full domain name e.g. www.myapp.com
+    Type: String
+Resources:
+  WebsiteBucket:
+    Properties:
+      AccessControl: PublicRead
+      BucketName:
+        Ref: BucketName
+      WebsiteConfiguration:
+        ErrorDocument: 404.html
+        IndexDocument: index.html
+    Type: AWS::S3::Bucket
+  WebsiteBucketPolicy:
+    Properties:
+      Bucket:
+        Ref: WebsiteBucket
+      PolicyDocument:
+        Statement:
+        - Action: s3:GetObject
+          Effect: Allow
+          Principal: '*'
+          Resource:
+            Fn::Join:
+            - ''
+            - - 'arn:aws:s3:::'
+              - Ref: WebsiteBucket
+              - /*
+          Sid: PublicReadForGetBucketObjects
+    Type: AWS::S3::BucketPolicy

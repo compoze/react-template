@@ -1,5 +1,5 @@
 {
-  "name": "react-template",
+  "name": "myapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,11 +16,18 @@
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
+  "config": {
+    "bucketName": "myapp.compoze",
+    "projectName": "myapp"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "./scripts/deploy.sh $npm_package_config_bucketName",
+    "provision": "./scripts/provision.sh $npm_package_config_bucketName $npm_package_config_projectName",
+    "initialize": "./scripts/init.sh"
   },
   "eslintConfig": {
     "extends": [
