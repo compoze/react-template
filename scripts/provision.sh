@@ -15,5 +15,5 @@ aws cloudformation package --template-file "$PROJECT_DIR/cloudformation/website.
 --output-template-file s3-output.yml --s3-bucket "${BUCKET_NAME}"
 
 ##deploy site 
-aws cloudformation deploy --template-file s3-output.yml --stack-name "${PROJECT_NAME}-website-${ENV}" \
+aws cloudformation deploy --template-file s3-output.yml --stack-name "${PROJECT_NAME}-${ENV}" \
 --parameter-overrides BucketName="${BUCKET_NAME}.${ENV}" --no-fail-on-empty-changeset
