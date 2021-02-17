@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$SCRIPT_DIR/.."
 
 echo "installing dependencies"
-yarn install --frozen-lockfile
+npm ci
 echo "building component"
 npm run build
 echo "provisioning dev site"
