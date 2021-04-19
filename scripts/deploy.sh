@@ -9,6 +9,8 @@ PROJECT_DIR="$SCRIPT_DIR/.."
 BUCKET_NAME=$1
 ENV=$2
 
+npm run build
+
 S3_URL="s3://${BUCKET_NAME}.${ENV}"
 echo "Deploying website to ${S3_URL}"
 
