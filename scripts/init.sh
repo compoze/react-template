@@ -12,7 +12,7 @@ if [[ -z "${ENV}" ]]; then
     exit 1
 else
     echo "installing dependencies"
-    yarn install --frozen-lockfile
+    npm ci
     echo "building component"
     npm run build
     echo "provisioning $ENV site"
