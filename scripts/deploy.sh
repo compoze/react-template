@@ -9,6 +9,7 @@ PROJECT_DIR="$SCRIPT_DIR/.."
 BUCKET_NAME=$1
 ENV=$2
 
+npm ci
 npm run build
 
 S3_URL="s3://${BUCKET_NAME}.${ENV}"
